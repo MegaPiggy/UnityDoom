@@ -16,6 +16,7 @@
 
 
 using System;
+using UnityEngine;
 
 namespace ManagedDoom.Video
 {
@@ -141,8 +142,8 @@ namespace ManagedDoom.Video
 
             // This hack aligns the view point to an integer coordinate
             // so that line shake is reduced when the view point moves.
-            renderViewX = MathF.Round(zoom * ppu * actualViewX) / (zoom * ppu);
-            renderViewY = MathF.Round(zoom * ppu * actualViewY) / (zoom * ppu);
+            renderViewX = Mathf.Round(zoom * ppu * actualViewX) / (zoom * ppu);
+            renderViewY = Mathf.Round(zoom * ppu * actualViewY) / (zoom * ppu);
 
             foreach (var line in world.Map.Lines)
             {
@@ -211,8 +212,8 @@ namespace ManagedDoom.Video
                 var pos = ToScreenPos(am.Marks[i]);
                 screen.DrawPatch(
                     markNumbers[i],
-                    (int)MathF.Round(pos.X),
-                    (int)MathF.Round(pos.Y),
+                    (int)Mathf.Round(pos.X),
+                    (int)Mathf.Round(pos.Y),
                     scale);
             }
 

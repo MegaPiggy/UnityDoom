@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.ExceptionServices;
+
 using System.Text;
 
 namespace ManagedDoom
@@ -48,7 +48,7 @@ namespace ManagedDoom
                 // Ensure the static members are initialized.
                 DoomInfo.Strings.PRESSKEY.GetHashCode();
 
-                Console.Write("Load DeHackEd patches: ");
+                Logger.Log("Load DeHackEd patches: ");
 
                 foreach (var fileName in fileNames)
                 {
@@ -56,11 +56,11 @@ namespace ManagedDoom
                     ProcessLines(File.ReadLines(fileName));
                 }
 
-                Console.WriteLine("OK (" + string.Join(", ", fileNames.Select(x => Path.GetFileName(x))) + ")");
+                Logger.Log("OK (" + string.Join(", ", fileNames.Select(x => Path.GetFileName(x))) + ")");
             }
             catch (Exception e)
             {
-                Console.WriteLine("Failed");
+                Logger.Log("Failed");
                 throw new Exception("Failed to apply DeHackEd patch: " + lastFileName, e);
             }
         }
@@ -76,15 +76,15 @@ namespace ManagedDoom
 
                 try
                 {
-                    Console.Write("Load DeHackEd patch from WAD: ");
+                    Logger.Log("Load DeHackEd patch from WAD: ");
 
                     ProcessLines(ReadLines(wad.ReadLump(lump)));
 
-                    Console.WriteLine("OK");
+                    Logger.Log("OK");
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Failed");
+                    Logger.Log("Failed");
                     throw new Exception("Failed to apply DeHackEd patch!", e);
                 }
             }
@@ -409,7 +409,7 @@ namespace ManagedDoom
         {
             foreach (var line in data.Skip(1))
             {
-                var split = line.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var split = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                 if (split.Length >= 3 && split[0] == "par")
                 {

@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace ManagedDoom.Video
 {
@@ -459,10 +460,10 @@ namespace ManagedDoom.Video
 
             if (accept)
             {
-                var bx1 = Math.Clamp((int)x1, 0, width - 1);
-                var by1 = Math.Clamp((int)y1, 0, height - 1);
-                var bx2 = Math.Clamp((int)x2, 0, width - 1);
-                var by2 = Math.Clamp((int)y2, 0, height - 1);
+                var bx1 = Mathf.Clamp((int)x1, 0, width - 1);
+                var by1 = Mathf.Clamp((int)y1, 0, height - 1);
+                var bx2 = Mathf.Clamp((int)x2, 0, width - 1);
+                var by2 = Mathf.Clamp((int)y2, 0, height - 1);
                 Bresenham(bx1, by1, bx2, by2, color);
             }
         }

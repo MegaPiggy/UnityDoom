@@ -138,7 +138,7 @@ namespace ManagedDoom.Silk
             try
             {
                 var frameFrac = Fixed.FromInt(frameCount % fpsScale + 1) / fpsScale;
-                video.Render(doom, frameFrac);
+                video.Render(doom);
             }
             catch (Exception e)
             {

@@ -150,12 +150,12 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Restore settings: ");
+                Logger.Log("Restore settings: ");
 
                 var dic = new Dictionary<string, string>();
                 foreach (var line in File.ReadLines(path))
                 {
-                    var split = line.Split('=', StringSplitOptions.RemoveEmptyEntries);
+                    var split = line.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
                     if (split.Length == 2)
                     {
                         dic[split[0].Trim()] = split[1].Trim();
@@ -185,7 +185,6 @@ namespace ManagedDoom
                 video_displaymessage = GetBool(dic, nameof(video_displaymessage), video_displaymessage);
                 video_gamescreensize = GetInt(dic, nameof(video_gamescreensize), video_gamescreensize);
                 video_gammacorrection = GetInt(dic, nameof(video_gammacorrection), video_gammacorrection);
-                video_fpsscale = GetInt(dic, nameof(video_fpsscale), video_fpsscale);
 
                 audio_soundvolume = GetInt(dic, nameof(audio_soundvolume), audio_soundvolume);
                 audio_musicvolume = GetInt(dic, nameof(audio_musicvolume), audio_musicvolume);
@@ -195,11 +194,16 @@ namespace ManagedDoom
 
                 isRestoredFromFile = true;
 
-                Console.WriteLine("OK");
+                Logger.Log("OK");
+            }
+            catch (FileNotFoundException)
+            {
+
             }
             catch
             {
-                Console.WriteLine("Failed");
+                Logger.Log("Failed");
+                throw;
             }
         }
 
@@ -243,6 +247,7 @@ namespace ManagedDoom
             }
             catch
             {
+                throw;
             }
         }
 

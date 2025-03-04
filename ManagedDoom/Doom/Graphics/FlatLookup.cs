@@ -18,7 +18,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
+
 
 namespace ManagedDoom
 {
@@ -75,7 +75,7 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load flats: ");
+                Logger.Log("Load flats: ");
 
                 var firstFlat = wad.GetLumpNumber("F_START") + 1;
                 var lastFlat = wad.GetLumpNumber("F_END") - 1;
@@ -105,12 +105,12 @@ namespace ManagedDoom
                 skyFlatNumber = nameToNumber["F_SKY1"];
                 skyFlat = nameToFlat["F_SKY1"];
 
-                Console.WriteLine("OK (" + nameToFlat.Count + " flats)");
+                Logger.Log("OK (" + nameToFlat.Count + " flats)");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 
@@ -118,7 +118,7 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load flats: ");
+                Logger.Log("Load flats: ");
 
                 var allFlats = new List<int>();
                 var flatZone = false;
@@ -183,12 +183,12 @@ namespace ManagedDoom
                 skyFlatNumber = nameToNumber["F_SKY1"];
                 skyFlat = nameToFlat["F_SKY1"];
 
-                Console.WriteLine("OK (" + nameToFlat.Count + " flats)");
+                Logger.Log("OK (" + nameToFlat.Count + " flats)");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 

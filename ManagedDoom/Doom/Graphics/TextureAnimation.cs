@@ -17,7 +17,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
+
 
 namespace ManagedDoom
 {
@@ -29,7 +29,7 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load texture animation info: ");
+                Logger.Log("Load texture animation info: ");
 
                 var list = new List<TextureAnimationInfo>();
 
@@ -75,12 +75,12 @@ namespace ManagedDoom
 
                 animations = list.ToArray();
 
-                Console.WriteLine("OK");
+                Logger.Log("OK");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 

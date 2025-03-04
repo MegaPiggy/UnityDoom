@@ -18,7 +18,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
 
 namespace ManagedDoom
 {
@@ -38,17 +37,17 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load textures: ");
+                Logger.Log("Load textures: ");
 
                 InitLookup(wad);
                 InitSwitchList();
 
-                Console.WriteLine("OK (" + textures.Count + " textures)");
+                Logger.Log("OK (" + textures.Count + " textures)");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 
@@ -74,9 +73,11 @@ namespace ManagedDoom
                 {
                     var offset = BitConverter.ToInt32(data, 4 + 4 * i);
                     var texture = Texture.FromData(data, offset, patches);
-                    nameToNumber.TryAdd(texture.Name, textures.Count);
+                    if (!nameToNumber.ContainsKey(texture.Name))
+                        nameToNumber.Add(texture.Name, textures.Count);
                     textures.Add(texture);
-                    nameToTexture.TryAdd(texture.Name, texture);
+                    if (!nameToTexture.ContainsKey(texture.Name))
+                        nameToTexture.Add(texture.Name, texture);
                 }
             }
         }

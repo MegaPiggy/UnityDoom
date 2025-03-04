@@ -40,9 +40,11 @@ namespace ManagedDoom
                     var name = Texture.GetName(data, offset);
                     var height = Texture.GetHeight(data, offset);
                     var texture = DummyData.GetTexture(height);
-                    nameToNumber.TryAdd(name, textures.Count);
+                    if (!nameToNumber.ContainsKey(name))
+                        nameToNumber.Add(name, textures.Count);
                     textures.Add(texture);
-                    nameToTexture.TryAdd(name, texture);
+                    if (!nameToTexture.ContainsKey(name))
+                        nameToTexture.Add(name, texture);
                 }
             }
         }

@@ -16,7 +16,7 @@
 
 
 using System;
-using System.Runtime.ExceptionServices;
+
 
 namespace ManagedDoom
 {
@@ -30,7 +30,7 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load color map: ");
+                Logger.Log("Load color map: ");
 
                 var raw = wad.ReadLump("COLORMAP");
                 var num = raw.Length / 256;
@@ -45,12 +45,12 @@ namespace ManagedDoom
                     }
                 }
 
-                Console.WriteLine("OK");
+                Logger.Log("OK");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 

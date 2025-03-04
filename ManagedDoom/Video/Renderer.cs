@@ -95,19 +95,19 @@ namespace ManagedDoom.Video
             palette.ResetColors(gammaCorrectionParameters[config.video_gammacorrection]);
         }
 
-        public void RenderDoom(Doom doom, Fixed frameFrac)
+        public void RenderDoom(Doom doom)
         {
             if (doom.State == DoomState.Opening)
             {
-                openingSequence.Render(doom.Opening, frameFrac);
+                openingSequence.Render(doom.Opening);
             }
             else if (doom.State == DoomState.DemoPlayback)
             {
-                RenderGame(doom.DemoPlayback.Game, frameFrac);
+                RenderGame(doom.DemoPlayback.Game);
             }
             else if (doom.State == DoomState.Game)
             {
-                RenderGame(doom.Game, frameFrac);
+                RenderGame(doom.Game);
             }
 
             if (!doom.Menu.Active)
@@ -134,13 +134,8 @@ namespace ManagedDoom.Video
             }
         }
 
-        public void RenderGame(DoomGame game, Fixed frameFrac)
+        public void RenderGame(DoomGame game)
         {
-            if (game.Paused)
-            {
-                frameFrac = Fixed.One;
-            }
-
             if (game.State == GameState.Level)
             {
                 var consolePlayer = game.World.ConsolePlayer;
@@ -153,7 +148,7 @@ namespace ManagedDoom.Video
                 }
                 else
                 {
-                    threeD.Render(displayPlayer, frameFrac);
+                    threeD.Render(displayPlayer);
                     if (threeD.WindowSize < 8)
                     {
                         statusBar.Render(consolePlayer, true);
@@ -183,7 +178,7 @@ namespace ManagedDoom.Video
             }
         }
 
-        public void Render(Doom doom, byte[] destination, Fixed frameFrac)
+        public void Render(Doom doom, byte[] destination)
         {
             if (doom.Wiping)
             {
@@ -191,7 +186,7 @@ namespace ManagedDoom.Video
                 return;
             }
 
-            RenderDoom(doom, frameFrac);
+            RenderDoom(doom);
             RenderMenu(doom);
 
             var colors = palette[0];
@@ -217,7 +212,7 @@ namespace ManagedDoom.Video
 
         private void RenderWipe(Doom doom, byte[] destination)
         {
-            RenderDoom(doom, Fixed.One);
+            RenderDoom(doom);
 
             var wipe = doom.WipeEffect;
             var scale = screen.Width / 320;
@@ -230,7 +225,7 @@ namespace ManagedDoom.Video
                 var dy = (float)(y2 - y1) / wipeBandWidth;
                 for (var x = x1; x < x2; x++)
                 {
-                    var y = (int)MathF.Round(y1 + dy * ((x - x1) / 2 * 2));
+                    var y = (int)UnityEngine.Mathf.Round(y1 + dy * ((x - x1) / 2 * 2));
                     var copyLength = screen.Height - y;
                     if (copyLength > 0)
                     {
@@ -254,11 +249,28 @@ namespace ManagedDoom.Video
         private void WriteData(uint[] colors, byte[] destination)
         {
             var screenData = screen.Data;
+
+            var t = 0;
+            for (var i = 0; i < screenData.Length; i++)
+            {
+                var c = colors[screenData[i]];
+                var r = (byte)((c >>  0) & 0xFFU);
+                var g = (byte)((c >>  8) & 0xFFU);
+                var b = (byte)((c >> 16) & 0xFFU);
+                var a = (byte)((c >> 24) & 0xFFU);
+                destination[t + 0] = r;
+                destination[t + 1] = g;
+                destination[t + 2] = b;
+                destination[t + 3] = a;
+                t += 4;
+            }
+            /*
             var p = MemoryMarshal.Cast<byte, uint>(destination);
             for (var i = 0; i < p.Length; i++)
             {
                 p[i] = colors[screenData[i]];
             }
+            */
         }
 
         private static int GetPaletteNumber(Player player)

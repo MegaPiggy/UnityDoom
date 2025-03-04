@@ -17,7 +17,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
+
 
 namespace ManagedDoom
 {
@@ -29,7 +29,7 @@ namespace ManagedDoom
         {
             try
             {
-                Console.Write("Load sprites: ");
+                Logger.Log("Load sprites: ");
 
                 var temp = new Dictionary<string, List<SpriteInfo>>();
                 for (var i = 0; i < (int)Sprite.Count; i++)
@@ -129,12 +129,12 @@ namespace ManagedDoom
                     spriteDefs[i] = new SpriteDef(frames);
                 }
 
-                Console.WriteLine("OK (" + cache.Count + " sprites)");
+                Logger.Log("OK (" + cache.Count + " sprites)");
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine("Failed");
-                ExceptionDispatchInfo.Throw(e);
+                Logger.Log("Failed");
+                throw;
             }
         }
 

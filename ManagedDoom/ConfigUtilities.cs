@@ -25,6 +25,8 @@ namespace ManagedDoom
 {
     public static class ConfigUtilities
     {
+        public static string OverrideExeDirectory;
+
         private static readonly string[] iwadNames = new string[]
         {
             "DOOM2.WAD",
@@ -38,6 +40,7 @@ namespace ManagedDoom
 
         public static string GetExeDirectory()
         {
+            if (!string.IsNullOrEmpty(OverrideExeDirectory)) return OverrideExeDirectory;
             return Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
         }
 

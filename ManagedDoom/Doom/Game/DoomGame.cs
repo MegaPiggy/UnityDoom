@@ -17,6 +17,7 @@
 
 using System;
 using System.IO;
+using UnityEngine;
 
 namespace ManagedDoom
 {
@@ -493,11 +494,11 @@ namespace ManagedDoom
 
 		public void InitNew(GameSkill skill, int episode, int map)
 		{
-			options.Skill = (GameSkill)Math.Clamp((int)skill, (int)GameSkill.Baby, (int)GameSkill.Nightmare);
+			options.Skill = (GameSkill)Mathf.Clamp((int)skill, (int)GameSkill.Baby, (int)GameSkill.Nightmare);
 
 			if (options.GameMode == GameMode.Retail)
 			{
-				options.Episode = Math.Clamp(episode, 1, 4);
+				options.Episode = Mathf.Clamp(episode, 1, 4);
 			}
 			else if (options.GameMode == GameMode.Shareware)
 			{
@@ -505,16 +506,16 @@ namespace ManagedDoom
 			}
 			else
 			{
-				options.Episode = Math.Clamp(episode, 1, 4);
+				options.Episode = Mathf.Clamp(episode, 1, 4);
 			}
 
 			if (options.GameMode == GameMode.Commercial)
 			{
-				options.Map = Math.Clamp(map, 1, 32);
+				options.Map = Mathf.Clamp(map, 1, 32);
 			}
 			else
 			{
-				options.Map = Math.Clamp(map, 1, 9);
+				options.Map = Mathf.Clamp(map, 1, 9);
 			}
 
 			options.Random.Clear();

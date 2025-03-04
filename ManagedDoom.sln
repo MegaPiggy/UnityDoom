@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDoom", "ManagedDoom\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedDoomTest", "ManagedDoomTest\ManagedDoomTest.csproj", "{3C8EB699-FD61-4952-87AD-33A0044A0CB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeltySynth", "MeltySynth\MeltySynth.csproj", "{549A4F1E-0ABE-4C8A-8175-E49F40F292D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3C8EB699-FD61-4952-87AD-33A0044A0CB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C8EB699-FD61-4952-87AD-33A0044A0CB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C8EB699-FD61-4952-87AD-33A0044A0CB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549A4F1E-0ABE-4C8A-8175-E49F40F292D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549A4F1E-0ABE-4C8A-8175-E49F40F292D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549A4F1E-0ABE-4C8A-8175-E49F40F292D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549A4F1E-0ABE-4C8A-8175-E49F40F292D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
