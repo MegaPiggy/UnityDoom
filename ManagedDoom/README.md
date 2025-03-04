@@ -64,7 +64,6 @@ https://www.youtube.com/watch?v=WIdIOzQFVq0
     - [x] Screen melt animation
     - [x] Config
     - [x] DeHackEd support
-    - [x] Frame interpolation
 
 ## License
 
